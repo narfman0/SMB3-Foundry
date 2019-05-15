@@ -26,6 +26,7 @@ class LevelView(wx.Panel):
         self.selected_objects = []
 
         self.selection_square = SelectionSquare()
+        self.should_draw_boxes = False
 
     def start_selection_square(self, position):
         self.selection_square.start(position)
@@ -137,7 +138,9 @@ class LevelView(wx.Panel):
         if self.level is None:
             return
 
-        self.level.draw(dc, transparency=self.transparency)
+        self.level.draw(
+            dc, transparency=self.transparency, boxes=self.should_draw_boxes
+        )
 
         if self.grid_lines:
             dc.SetPen(self.grid_pen)
